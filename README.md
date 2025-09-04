@@ -12,7 +12,7 @@ Configs live here and are symlinked back to the right place.
 Clone into your home directory:
 
 ```bash
-git clone git@github.com:yourusername/dot_files.git ~/dot_files
+git clone git@github.com:Zayan-Mohamed/dot_files.git ~/dot_files
 cd ~/dot_files
 ```
 ```
