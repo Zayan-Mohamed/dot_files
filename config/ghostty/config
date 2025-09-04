@@ -1,0 +1,56 @@
+font-family = "JetBrainsMono Nerd Font"
+font-feature                   = calt
+font-feature                   = liga
+font-feature                   = ss13
+
+font-size = 12
+adjust-cell-height = 50%
+
+
+maximize = false
+alpha-blending = linear-corrected
+
+working-directory = home
+shell-integration = zsh
+shell-integration-features = no-cursor
+cursor-style = block
+adjust-cursor-height = 50%
+window-theme = system
+window-decoration = auto
+window-padding-x = 8
+window-padding-y = 8
+window-padding-balance = true
+window-height=510
+window-width=1640
+
+theme = dark:"Blue Matrix",light:dayfox
+
+gtk-titlebar-hide-when-maximized=true
+#gtk-tabs-location=hidden
+bold-is-bright=true
+
+
+
+
+clipboard-paste-protection     = true
+clipboard-trim-trailing-spaces = true
+copy-on-select                 = true
+link-url                       = true
+mouse-hide-while-typing        = true
+window-vsync                   = true
+
+
+# Key bindings
+keybind                        = ctrl+h=goto_split:left
+keybind                        = ctrl+j=goto_split:bottom
+keybind                        = ctrl+k=goto_split:top
+keybind                        = ctrl+l=goto_split:right
+keybind                        = ctrl+shift+h=new_split:left
+keybind                        = ctrl+shift+j=new_split:down
+keybind                        = ctrl+shift+k=new_split:up
+keybind                        = ctrl+shift+l=new_split:right
+keybind                        = super+shift+enter=new_split:auto
+keybind                        = super+shift+i=inspector:toggle
+keybind                        = super+shift+r=reload_config
+keybind                        = super+ctrl+t=new_tab
+

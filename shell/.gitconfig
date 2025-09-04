@@ -1,0 +1,15 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[pull]
+	rebase = true
+[user]
+	name = Zayan-Mohamed
+	email = itsm.zayan@gmail.com
+	signingkey = 83ABEAB456DD3780
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg

@@ -1,0 +1,12 @@
+# swap files, editor caches
+*.swp
+*.swo
+*.un~
+# node, python, etc
+node_modules/
+__pycache__/
+*.pyc
+# secrets / env
+.env
+*.pem
+secrets.yml

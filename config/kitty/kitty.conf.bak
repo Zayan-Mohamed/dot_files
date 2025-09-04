@@ -1,0 +1,125 @@
+# ────────────────────────────────
+# Kitty Configuration – Best of the Best
+# ~/.config/kitty/kitty.conf
+# ────────────────────────────────
+
+shell /usr/bin/zsh
+
+# Font settings
+font_family      JetBrainsMono Nerd Font
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+font_size        12.5
+adjust_line_height  110%
+adjust_column_width 100%
+
+# Smooth scrolling and rendering
+enable_audio_bell no
+visual_bell_duration 0
+window_padding_width 8
+window_border_width 1
+cursor_shape        block
+cursor_blink_interval 0
+
+# Performance tweaks
+repaint_delay 7
+input_delay   2
+sync_to_monitor yes
+scrollback_lines 20000
+
+# ────────────────────────────────
+# Colors (Nord theme, eye-friendly)
+# ────────────────────────────────
+# foreground       #D8DEE9
+# background       #2E3440
+# cursor           #88C0D0
+# color0  #3B4252
+# color1  #BF616A
+# color2  #A3BE8C
+# color3  #EBCB8B
+# color4  #81A1C1
+# color5  #B48EAD
+# color6  #88C0D0
+# color7  #E5E9F0
+# color8  #4C566A
+# color9  #BF616A
+# color10 #A3BE8C
+# color11 #EBCB8B
+# color12 #81A1C1
+# color13 #B48EAD
+# color14 #8FBCBB
+# color15 #ECEFF4
+
+# Tab bar
+tab_bar_style        powerline
+tab_powerline_style  slanted
+# active_tab_foreground   #2E3440
+# active_tab_background   #88C0D0
+# inactive_tab_foreground #D8DEE9
+# inactive_tab_background #4C566A
+tab_bar_edge           top
+tab_bar_min_tabs       2
+
+# ────────────────────────────────
+# Keybindings
+# ────────────────────────────────
+# Tabs
+map ctrl+shift+t new_tab
+map ctrl+shift+w close_tab
+map ctrl+tab     next_tab
+map ctrl+shift+tab previous_tab
+
+# Windows (splits)
+map ctrl+shift+enter new_window
+map ctrl+shift+left  move_window left
+map ctrl+shift+right move_window right
+map ctrl+shift+up    move_window up
+map ctrl+shift+down  move_window down
+
+# ────────────────
+# Splits (Panes)
+# ────────────────
+
+# Open a new split (default: vertical)
+map ctrl+shift+enter new_window
+
+# Horizontal split
+map ctrl+shift+e launch --type=window --location=hsplit
+
+# Vertical split
+map ctrl+shift+d launch --type=window --location=vsplit
+
+# Navigate between splits
+map ctrl+shift+h neighboring_window left
+map ctrl+shift+l neighboring_window right
+map ctrl+shift+k neighboring_window up
+map ctrl+shift+j neighboring_window down
+
+# Resize splits
+map ctrl+shift+alt+h resize_window narrower
+map ctrl+shift+alt+l resize_window wider
+map ctrl+shift+alt+k resize_window taller
+map ctrl+shift+alt+j resize_window shorter
+
+# Clipboard
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+v paste_from_clipboard
+
+# Search
+map ctrl+shift+f search
+
+# ────────────────────────────────
+# Other
+# ────────────────────────────────
+confirm_os_window_close 0
+allow_remote_control yes
+hide_window_decorations yes
+
+
+
+
+# BEGIN_KITTY_THEME
+# Cyberpunk
+include current-theme.conf
+# END_KITTY_THEME
