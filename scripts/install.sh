@@ -29,4 +29,16 @@ for f in "$DOT/home/"*; do
   echo "    Linked $target → $f"
 done
 
+# Link aliases file as ~/.aliases
+if [ -f "$DOT/shell/linux_aliases.sh" ]; then
+  target="$HOME/.aliases"
+  if [ -e "$target" ] || [ -L "$target" ]; then
+    echo "    Removing existing $target"
+    rm -rf "$target"
+  fi
+  ln -sfn "$DOT/shell/linux_aliases.sh" "$target"
+  echo "    Linked $target → $DOT/shell/linux_aliases.sh"
+fi
+
 echo "[✓] All configs linked."
+

@@ -81,7 +81,9 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions z)
 
 source $ZSH/oh-my-zsh.sh
-source /mnt/data/linux_aliases.sh
+
+# Load custom aliases
+[ -f ~/.aliases ] && source ~/.aliases
 
 # User configuration
 
@@ -153,3 +155,10 @@ unset __conda_setup
 
 #lua-language-server
 export PATH="$HOME/lua-language-server/bin:$PATH"
+
+# Added by CodeRabbit CLI installer
+export PATH="/home/zayan/.local/bin:$PATH"
+
+#Added cargo-binstall PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+

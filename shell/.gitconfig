@@ -13,3 +13,5 @@
 	gpgsign = true
 [gpg]
 	program = gpg
+[coderabbit]
+	machineId = cli/01724e025d5f4855aa49d425d0d68154
