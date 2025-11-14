@@ -5,10 +5,11 @@ DOT="$HOME/dot_files"
 
 echo "[*] Linking configs..."
 
-# Link ~/.config/*
+# 1. Link ~/.config/*
 for d in "$DOT/config/"*; do
   name=$(basename "$d")
   target="$HOME/.config/$name"
+  mkdir -p "$(dirname "$target")"
   if [ -e "$target" ] || [ -L "$target" ]; then
     echo "    Removing existing $target"
     rm -rf "$target"
@@ -17,7 +18,7 @@ for d in "$DOT/config/"*; do
   echo "    Linked $target → $d"
 done
 
-# Link ~/dotfiles (home)
+# 2. Link ~/.* dotfiles
 for f in "$DOT/home/"*; do
   name=$(basename "$f")
   target="$HOME/$name"
@@ -29,7 +30,7 @@ for f in "$DOT/home/"*; do
   echo "    Linked $target → $f"
 done
 
-# Link aliases file as ~/.aliases
+# 3. Link aliases file as ~/.aliases
 if [ -f "$DOT/shell/linux_aliases.sh" ]; then
   target="$HOME/.aliases"
   if [ -e "$target" ] || [ -L "$target" ]; then
@@ -40,10 +41,23 @@ if [ -f "$DOT/shell/linux_aliases.sh" ]; then
   echo "    Linked $target → $DOT/shell/linux_aliases.sh"
 fi
 
-if [ -x "$DOT/scripts/install_zsh_plugins.sh" ]; then
+# 4. Ensure Oh My Zsh custom plugins are installed
+PLUGIN_INSTALLER="$DOT/scripts/install_zsh_plugins.sh"
+if [ -x "$PLUGIN_INSTALLER" ]; then
   echo "[*] Ensuring Zsh plugins are installed..."
-  "$DOT/scripts/install_zsh_plugins.sh"
+  "$PLUGIN_INSTALLER"
+fi
+
+# 5. Link scripts folder (optional, for convenience)
+SCRIPTS_SRC="$DOT/scripts"
+SCRIPTS_TARGET="$HOME/scripts"
+if [ -d "$SCRIPTS_SRC" ]; then
+  if [ -e "$SCRIPTS_TARGET" ] || [ -L "$SCRIPTS_TARGET" ]; then
+    echo "    Removing existing $SCRIPTS_TARGET"
+    rm -rf "$SCRIPTS_TARGET"
+  fi
+  ln -sfn "$SCRIPTS_SRC" "$SCRIPTS_TARGET"
+  echo "    Linked $SCRIPTS_TARGET → $SCRIPTS_SRC"
 fi
 
 echo "[✓] All configs linked."
-

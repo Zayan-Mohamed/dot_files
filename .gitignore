@@ -10,3 +10,4 @@ __pycache__/
 .env
 *.pem
 secrets.yml
+backups/
