@@ -78,7 +78,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git zsh-autosuggestions z)
+plugins=(
+git 
+zsh-autosuggestions
+z
+zsh-syntax-highlighting
+zsh-history-substring-search
+colored-man-pages
+sudo
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -161,4 +169,27 @@ export PATH="/home/zayan/.local/bin:$PATH"
 
 #Added cargo-binstall PATH
 export PATH="$HOME/.cargo/bin:$PATH"
+
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Enable command completion
+autoload -Uz compinit && compinit
+
+# Enable fzf key bindings for Zsh if installed
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# Better history behavior
+HISTSIZE=50000
+SAVEHIST=50000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_VERIFY
+
+# Make directory navigation smoother
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+
 

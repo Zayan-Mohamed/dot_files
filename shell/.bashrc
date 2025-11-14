@@ -17,3 +17,5 @@ export PATH="$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin"
 export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 export PATH="$PATH:$ANDROID_SDK_ROOT/emulator"
 
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"

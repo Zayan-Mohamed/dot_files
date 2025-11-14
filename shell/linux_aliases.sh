@@ -1,3 +1,11 @@
+# Directory Listing (modern eza)
+alias ll="eza -la --icons --group-directories-first"
+alias la="eza -a --icons --group-directories-first"
+alias l="eza --icons --group-directories-first"
+alias lt="eza -l --sort=modified --icons --group-directories-first"
+alias ltr="eza -l --sort=modified --reverse --icons --group-directories-first"
+alias lsd="eza -D --icons --group-directories-first"
+
 # General Navigation
 alias ..="cd .."
 alias ...="cd ../.."
@@ -8,14 +16,6 @@ alias c="clear"
 alias h="history"
 alias j="jobs"
 alias please="sudo"
-
-# Directory Listing
-alias ll="ls -alF"
-alias la="ls -A"
-alias l="ls -CF"
-alias lt="ls -lt"
-alias ltr="ls -ltr"
-alias lsd="ls -d */"
 
 # System Info
 alias cpuinfo="lscpu"

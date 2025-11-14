@@ -40,5 +40,10 @@ if [ -f "$DOT/shell/linux_aliases.sh" ]; then
   echo "    Linked $target → $DOT/shell/linux_aliases.sh"
 fi
 
+if [ -x "$DOT/scripts/install_zsh_plugins.sh" ]; then
+  echo "[*] Ensuring Zsh plugins are installed..."
+  "$DOT/scripts/install_zsh_plugins.sh"
+fi
+
 echo "[✓] All configs linked."
 
