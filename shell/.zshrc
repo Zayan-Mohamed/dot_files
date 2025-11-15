@@ -86,6 +86,11 @@ zsh-syntax-highlighting
 zsh-history-substring-search
 colored-man-pages
 sudo
+zsh-autopair
+web-search
+docker
+npm
+node
 )
 
 source $ZSH/oh-my-zsh.sh
