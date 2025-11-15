@@ -79,13 +79,18 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 
 plugins=(
-git 
+git
+node
+npm
+docker
 zsh-autosuggestions
 z
 zsh-syntax-highlighting
 zsh-history-substring-search
 colored-man-pages
 sudo
+zsh-autopair
+web-search
 )
 
 source $ZSH/oh-my-zsh.sh
