@@ -11,3 +11,4 @@ __pycache__/
 *.pem
 secrets.yml
 backups/
+config/oh-my-zsh/custom/plugins/*
