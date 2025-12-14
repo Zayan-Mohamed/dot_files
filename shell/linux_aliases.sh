@@ -71,6 +71,7 @@ alias gl='git log --graph --pretty=format:"%C(yellow)%h%Creset%C(auto)%d%Creset 
 alias ga="git add"
 alias gaa="git add -A"
 alias gc="git commit -m"
+alias gcs="git commit -s -m"
 alias gca="git commit -a -m"
 alias gp="git push"
 alias gpl="git pull"

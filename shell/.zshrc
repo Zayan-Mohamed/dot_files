@@ -8,6 +8,9 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
+# Enable P10k instant prompt
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -148,7 +151,7 @@ export PATH="$HOME/development/flutter/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 
 # >>> conda initialize >>>
@@ -184,7 +187,6 @@ autoload -Uz compinit && compinit
 # Enable fzf key bindings for Zsh if installed
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 # Better history behavior
 HISTSIZE=50000
 SAVEHIST=50000
@@ -197,4 +199,8 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+export PATH=$PATH:/usr/local/go/bin
+
+export PATH="$HOME/go/bin:$PATH"

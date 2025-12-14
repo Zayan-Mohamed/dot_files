@@ -17,3 +17,5 @@
 	machineId = cli/01724e025d5f4855aa49d425d0d68154
 [init]
 	defaultBranch = main
+[format]
+	signoff = true
