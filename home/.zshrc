@@ -190,9 +190,13 @@ autoload -Uz compinit && compinit
 # Better history behavior
 HISTSIZE=50000
 SAVEHIST=50000
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_SPACE
-setopt HIST_VERIFY
+setopt HIST_IGNORE_ALL_DUPS    # Don't record duplicate entries
+setopt HIST_IGNORE_SPACE       # Don't record entries starting with space
+setopt HIST_VERIFY             # Show command before executing from history
+setopt SHARE_HISTORY           # Share history across all sessions
+setopt INC_APPEND_HISTORY      # Add commands immediately, not on exit
+setopt HIST_REDUCE_BLANKS      # Remove extra blanks from commands
+setopt HIST_FIND_NO_DUPS       # Don't show duplicates when searching
 
 # Make directory navigation smoother
 setopt auto_cd

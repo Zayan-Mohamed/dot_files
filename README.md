@@ -32,8 +32,16 @@ dot_files/
 │   ├── install.sh              # links all configs, dotfiles, and scripts; ensures Zsh plugins installed
 │   ├── update.sh               # syncs system configs and plugins back into the repo with backups
 │   ├── install_zsh_plugins.sh  # installs missing Zsh plugins (syntax highlighting, history search)
+│   ├── health_check.sh         # verifies symlinks and checks dependencies
+│   ├── check_tools.sh          # checks for recommended CLI tools
 │   └── fix_nested.sh           # flattens accidental nested directories
 │
+├── shell/                      # shell configuration
+│   └── linux_aliases.sh        # custom aliases (linked to ~/.aliases)
+│
+├── QUICKSTART.md               # 5-minute setup guide
+├── DEPENDENCIES.md             # required and optional dependencies
+├── NVIM_STUDY_GUIDE.md         # comprehensive Neovim usage guide
 └── README.md
 ```
 
@@ -87,7 +95,31 @@ This will:
 
 ---
 
-## 📚 Documentation
+## � Quick Commands
+
+### Check System Health
+
+```bash
+~/scripts/health_check.sh    # Verify symlinks and essential tools
+~/scripts/check_tools.sh     # Check for recommended modern CLI tools
+```
+
+### Common Tasks
+
+```bash
+~/scripts/install.sh         # Initial setup or re-link configs
+~/scripts/update.sh          # Sync changes back to repo
+source ~/.zshrc              # Reload shell configuration
+```
+
+---
+
+## �📚 Documentation
+
+### 📖 Guides
+
+- **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
+- **[DEPENDENCIES.md](./DEPENDENCIES.md)** - All required and optional dependencies
 
 ### Neovim Study Guide
 
@@ -109,6 +141,64 @@ This guide includes:
 - **Practice Exercises** - Hands-on scenarios to build muscle memory
 
 Perfect for both beginners learning Neovim and experienced users wanting to leverage the full power of this configuration.
+
+---
+
+## ✨ What's New (Recent Enhancements)
+
+### Scripts
+
+- ✅ **health_check.sh** - Verify all symlinks and dependencies
+- ✅ **check_tools.sh** - Check for modern CLI tools with installation instructions
+- ✅ Fixed bug in `update.sh` that was copying scripts to themselves
+
+### Configuration
+
+- ✅ **Global .gitignore** - Comprehensive gitignore for all projects
+- ✅ **Enhanced Git aliases** - Better git log, undo, cleanup, and more
+- ✅ **Modern CLI tool aliases** - Conditional aliases for bat, fd, rg, dust, etc.
+- ✅ **Safety aliases** - Interactive cp, mv, ln to prevent accidents
+- ✅ **Improved history** - Shared history across sessions, better deduplication
+- ✅ **Development shortcuts** - Quick navigation, editing, and workflow aliases
+
+### Documentation
+
+- ✅ **QUICKSTART.md** - Fast onboarding for new users
+- ✅ **DEPENDENCIES.md** - Complete dependency documentation
+- ✅ **NVIM_STUDY_GUIDE.md** - Comprehensive Neovim learning guide
+- ✅ **ENHANCEMENT_PLAN.md** - Future improvements roadmap
+
+### Structure
+
+- ✅ Moved shell configs (.zshrc, .bashrc, .gitconfig) to proper `home/` location
+- ✅ Better organization and consistency
+
+---
+
+## 🎯 Features
+
+### Terminals
+
+- **Alacritty** - GPU-accelerated, highly configurable
+- **Kitty** - Advanced features with ligatures
+- **Ghostty** - Modern, native terminal
+
+### Shell (Zsh)
+
+- **Powerlevel10k** theme with beautiful prompts
+- **Syntax highlighting** as you type
+- **Autosuggestions** from command history
+- **Smart history** shared across all sessions
+- **Modern aliases** for common tasks
+
+### Editor (Neovim)
+
+- 80+ plugins pre-configured
+- LSP support for Python, Lua, Bash, YAML, Vim
+- Fuzzy finding with FZF-lua
+- Git integration with Fugitive, Gitsigns
+- Treesitter syntax highlighting
+- See full guide in [NVIM_STUDY_GUIDE.md](./NVIM_STUDY_GUIDE.md)
 
 ---
 

@@ -1,0 +1,54 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	
+	# Better logging
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lol = log --oneline --graph --decorate --all
+	last = log -1 HEAD --stat
+	
+	# Quick undo
+	undo = reset --soft HEAD^
+	amend = commit --amend --no-edit
+	
+	# Show what changed
+	changed = diff --name-only
+	diffstat = diff --stat
+	
+	# Interactive staging
+	stage = add --patch
+	unstage = reset HEAD --
+	
+	# Show contributors
+	contributors = shortlog -sn
+	
+	# Find branches containing commit
+	fb = "!f() { git branch -a --contains $1; }; f"
+	
+	# Clean merged branches
+	cleanup = "!git branch --merged | grep -v '\\*\\|main\\|master' | xargs -n 1 git branch -d"
+	
+	# Quick status
+	s = status -sb
+	
+	# Show aliases
+	aliases = config --get-regexp alias
+
+[pull]
+	rebase = true
+[user]
+	name = Zayan-Mohamed
+	email = itsm.zayan@gmail.com
+	signingkey = 83ABEAB456DD3780
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
+[coderabbit]
+	machineId = cli/01724e025d5f4855aa49d425d0d68154
+[init]
+	defaultBranch = main
+[format]
+	signoff = true
