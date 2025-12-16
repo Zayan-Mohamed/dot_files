@@ -52,3 +52,7 @@
 	defaultBranch = main
 [format]
 	signoff = true
+[trailer "sign"]
+	key = Signed-off-by
+	ifexists = add
+	where = end
