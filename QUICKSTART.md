@@ -255,6 +255,7 @@ chmod +x ~/dot_files/scripts/*.sh
 
 ## 📖 Learn More
 
+- **Neovim Keybindings**: [NVIM_KEYBINDINGS.md](./NVIM_KEYBINDINGS.md) ⭐ **NEW!**
 - **Neovim Guide**: [NVIM_STUDY_GUIDE.md](./NVIM_STUDY_GUIDE.md)
 - **Enhancement Plan**: [ENHANCEMENT_PLAN.md](./ENHANCEMENT_PLAN.md)
 - **Dependencies**: [DEPENDENCIES.md](./DEPENDENCIES.md)
