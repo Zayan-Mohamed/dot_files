@@ -120,6 +120,7 @@ source ~/.zshrc              # Reload shell configuration
 
 - **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
 - **[DEPENDENCIES.md](./DEPENDENCIES.md)** - All required and optional dependencies
+- **[KEYBINDINGS](./NVIM_KEYBINDINGS.md)** - Reference for all keybindings in your Neovim configuration
 
 ### Neovim Study Guide
 
