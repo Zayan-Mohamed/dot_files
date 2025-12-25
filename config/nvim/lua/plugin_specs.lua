@@ -305,6 +305,15 @@ local plugin_specs = {
     config = true,
   },
 
+  -- Auto-save plugin
+  {
+    "okuuva/auto-save.nvim",
+    event = { "InsertLeave", "TextChanged" },
+    config = function()
+      require("config.auto-save")
+    end,
+  },
+
   -- Comment plugin
   {
     "tpope/vim-commentary",
