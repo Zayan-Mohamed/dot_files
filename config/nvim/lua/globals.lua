@@ -15,6 +15,44 @@ vim.g.logging_level = vim.log.levels.INFO
 vim.g.loaded_perl_provider = 0 -- Disable perl provider
 vim.g.loaded_ruby_provider = 0 -- Disable ruby provider
 vim.g.loaded_node_provider = 0 -- Disable node provider
+
+-- Set Python3 provider (required for UltiSnips and other Python plugins)
+-- Dynamically find Python3 with pynvim installed, avoiding virtual environments
+local function find_python3_host()
+  -- Try system Python locations first (avoid venv/virtualenv)
+  local python_candidates = {
+    '/usr/bin/python3',
+    '/usr/local/bin/python3',
+    vim.fn.expand('~/miniconda3/bin/python3'),
+    vim.fn.expand('~/.pyenv/shims/python3'),
+  }
+  
+  -- Check each candidate
+  for _, python_path in ipairs(python_candidates) do
+    if vim.fn.executable(python_path) == 1 then
+      -- Verify pynvim is installed
+      local handle = io.popen(python_path .. ' -c "import pynvim" 2>&1')
+      if handle then
+        local result = handle:read("*a")
+        handle:close()
+        if result == "" then
+          return python_path
+        end
+      end
+    end
+  end
+  
+  -- Fallback: try to find any python3 in PATH (excluding venv)
+  local python_in_path = vim.fn.exepath('python3')
+  if python_in_path ~= "" and not python_in_path:match('/venv/') and not python_in_path:match('/virtualenv/') then
+    return python_in_path
+  end
+  
+  return nil
+end
+
+vim.g.python3_host_prog = find_python3_host()
+
 vim.g.did_install_default_menus = 1 -- do not load menu
 
 -- Custom mapping <leader> (see `:h mapleader` for more info)
