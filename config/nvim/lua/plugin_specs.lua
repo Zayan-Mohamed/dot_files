@@ -32,6 +32,9 @@ local plugin_specs = {
     "hrsh7th/nvim-cmp",
     name = "nvim-cmp",
     event = "VeryLazy",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter", -- Ensure treesitter loads first
+    },
     config = function()
       require("config.nvim-cmp")
     end,
@@ -64,16 +67,16 @@ local plugin_specs = {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPost", "BufNewFile" },
     build = ":TSUpdate",
+    priority = 1000, -- Load treesitter first
+    dependencies = {
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        -- IMPORTANT: Use 'main' branch, not 'master' (master is frozen/deprecated)
+        branch = "main",
+      },
+    },
     config = function()
       require("config.treesitter")
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    event = "VeryLazy",
-    branch = "master",
-    config = function()
-      require("config.treesitter-textobjects")
     end,
   },
   { "machakann/vim-swap", event = "VeryLazy" },
@@ -312,6 +315,21 @@ local plugin_specs = {
     config = function()
       require("config.auto-save")
     end,
+  },
+
+  -- Terminal plugin
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("config.toggleterm")
+    end,
+    keys = {
+      { "<C-\\>", desc = "Toggle terminal" },
+      { "<leader>tf", desc = "Toggle floating terminal" },
+      { "<leader>th", desc = "Toggle horizontal terminal" },
+      { "<leader>tv", desc = "Toggle vertical terminal" },
+    },
   },
 
   -- Comment plugin

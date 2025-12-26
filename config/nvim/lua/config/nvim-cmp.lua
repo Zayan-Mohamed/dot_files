@@ -6,7 +6,11 @@ require("cmp_nvim_lsp")
 require("cmp_path")
 require("cmp_buffer")
 require("cmp_omni")
-require("cmp_nvim_ultisnips")
+-- Protected call for cmp_nvim_ultisnips since it has treesitter dependencies
+local ok, _ = pcall(require, "cmp_nvim_ultisnips")
+if not ok then
+  vim.notify("cmp_nvim_ultisnips failed to load", vim.log.levels.WARN)
+end
 require("cmp_cmdline")
 
 local MiniIcons = require("mini.icons")

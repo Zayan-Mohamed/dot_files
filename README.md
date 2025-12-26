@@ -1,11 +1,29 @@
 # dot_files
 
-My personal Linux configuration files (terminals, editors, and tools).
+![OS](https://img.shields.io/badge/os-linux-blue)
+![Shell](https://img.shields.io/badge/shell-zsh-green)
+![Editor](https://img.shields.io/badge/editor-neovim-57A143)
+![License](https://img.shields.io/badge/license-MIT-black)
 
-This repo manages everything in `~/.config` and my dotfiles in `~`.
-Configs live here and are **symlinked** back to the right place for a fully reproducible setup.
+
+A fully reproducible Linux development environment built around symlinks.
+
+This repository manages everything in `~/.config` and essential dotfiles in `~`, all tracked in one place and safely symlinked back to the system.  
+The goal is simple: clone the repo, run one script, and get *your exact setup* every time.
+
+No manual copying. No drift. No mystery state.
 
 ---
+
+### What this repo gives you
+
+- A clean, versioned `~/.config`
+- Predictable dotfiles in `~`
+- Idempotent install and update scripts
+- Health checks to catch broken symlinks
+- A heavily tuned Neovim setup with documentation
+- A Zsh environment that feels fast, safe, and modern
+
 
 ## Structure
 
@@ -57,6 +75,10 @@ cd ~/dot_files
 ```
 
 ---
+
+> **Warning**
+> This repo is designed for **your personal setup**.
+> Always review scripts before running them on a new machine.
 
 ### 1. Link configs
 
