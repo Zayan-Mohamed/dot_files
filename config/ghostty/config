@@ -1,56 +1,165 @@
+# ==================================================
+# Font Configuration
+# ==================================================
 font-family = "JetBrainsMono Nerd Font"
-font-feature                   = calt
-font-feature                   = liga
-font-feature                   = ss13
-
 font-size = 12
+font-feature = calt
+font-feature = liga
+font-feature = ss13
+font-thicken = true
 adjust-cell-height = 50%
+adjust-cell-width = 0%
 
+# ==================================================
+# Theme Configuration
+# ==================================================
+# Automatic theme switching based on system appearance
+theme = dark:"Blue Matrix",light:dayfox
 
+# Alternative light themes you can try:
+# theme = dark:"Blue Matrix",light:"one-light"
+# theme = dark:"Blue Matrix",light:"github-light"
+# theme = dark:"Blue Matrix",light:"catppuccin-latte"
+# theme = dark:"Blue Matrix",light:"gruvbox-light"
+# theme = dark:"Blue Matrix",light:"solarized-light"
+
+# ==================================================
+# Window Appearance
+# ==================================================
+window-theme = system
+window-decoration = auto
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+window-height = 510
+window-width = 1640
+window-padding-color = extend
+window-inherit-working-directory = true
+window-inherit-font-size = true
 maximize = false
-alpha-blending = linear-corrected
 
+# Background styling
+background-opacity = 1.0
+background-blur-radius = 20
+unfocused-split-opacity = 0.8
+
+# ==================================================
+# Cursor Configuration
+# ==================================================
+cursor-style = block
+cursor-style-blink = true
+adjust-cursor-height = 50%
+cursor-opacity = 1.0
+cursor-invert-fg-bg = true
+
+# ==================================================
+# Terminal Behavior
+# ==================================================
 working-directory = home
 shell-integration = zsh
 shell-integration-features = no-cursor
-cursor-style = block
-adjust-cursor-height = 50%
-window-theme = system
-window-decoration = auto
-window-padding-x = 8
-window-padding-y = 8
-window-padding-balance = true
-window-height=510
-window-width=1640
+command = /usr/bin/zsh
 
-theme = dark:"Blue Matrix",light:dayfox
+# Scrolling
+mouse-scroll-multiplier = 3.0
 
-gtk-titlebar-hide-when-maximized=true
-#gtk-tabs-location=hidden
-bold-is-bright=true
+# ==================================================
+# Rendering & Performance
+# ==================================================
+alpha-blending = linear-corrected
+window-vsync = true
+font-codepoint-map = U+23FB-U+23FE=Symbols Nerd Font Mono
+font-codepoint-map = U+2665=Symbols Nerd Font Mono
+font-codepoint-map = U+26A1=Symbols Nerd Font Mono
+font-codepoint-map = U+E0A0-U+E0A3=Symbols Nerd Font Mono
+font-codepoint-map = U+E0B0-U+E0BF=Symbols Nerd Font Mono
+font-codepoint-map = U+E0C0-U+E0C8=Symbols Nerd Font Mono
+font-codepoint-map = U+E0CA=Symbols Nerd Font Mono
+font-codepoint-map = U+E0CC-U+E0D4=Symbols Nerd Font Mono
 
+# ==================================================
+# Text Rendering
+# ==================================================
+bold-is-bright = true
+minimum-contrast = 1.1
 
-
-
-clipboard-paste-protection     = true
+# ==================================================
+# Clipboard & Selection
+# ==================================================
+clipboard-paste-protection = true
 clipboard-trim-trailing-spaces = true
-copy-on-select                 = true
-link-url                       = true
-mouse-hide-while-typing        = true
-window-vsync                   = true
+clipboard-paste-bracketed-safe = true
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = true
 
+# ==================================================
+# Mouse & Input
+# ==================================================
+link-url = true
+mouse-hide-while-typing = true
+mouse-shift-capture = true
 
-# Key bindings
-keybind                        = ctrl+h=goto_split:left
-keybind                        = ctrl+j=goto_split:bottom
-keybind                        = ctrl+k=goto_split:top
-keybind                        = ctrl+l=goto_split:right
-keybind                        = ctrl+shift+h=new_split:left
-keybind                        = ctrl+shift+j=new_split:down
-keybind                        = ctrl+shift+k=new_split:up
-keybind                        = ctrl+shift+l=new_split:right
-keybind                        = super+shift+enter=new_split:auto
-keybind                        = super+shift+i=inspector:toggle
-keybind                        = super+shift+r=reload_config
-keybind                        = super+ctrl+t=new_tab
+# ==================================================
+# GTK Configuration
+# ==================================================
+gtk-titlebar-hide-when-maximized = true
+gtk-wide-tabs = true
+gtk-tabs-location = hidden
+
+# ==================================================
+# Tabs Configuration
+# ==================================================
+window-save-state = always
+quit-after-last-window-closed = false
+
+# ==================================================
+# Key Bindings
+# ==================================================
+# Split navigation (vim-style)
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Split creation
+keybind = ctrl+shift+h=new_split:left
+keybind = ctrl+shift+j=new_split:down
+keybind = ctrl+shift+k=new_split:up
+keybind = ctrl+shift+l=new_split:right
+keybind = super+shift+enter=new_split:auto
+
+# Split management
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+equal=equalize_splits
+keybind = ctrl+shift+z=toggle_split_zoom
+
+# Tab management
+keybind = super+ctrl+t=new_tab
+keybind = super+ctrl+w=close_tab
+keybind = super+ctrl+left=previous_tab
+keybind = super+ctrl+right=next_tab
+
+# Window management
+keybind = super+shift+i=inspector:toggle
+keybind = super+shift+r=reload_config
+keybind = super+shift+comma=open_config
+
+# Font size adjustment
+keybind = super+plus=increase_font_size:1
+keybind = super+minus=decrease_font_size:1
+keybind = super+0=reset_font_size
+
+# Scrollback
+keybind = shift+page_up=scroll_page_up
+keybind = shift+page_down=scroll_page_down
+keybind = shift+home=scroll_to_top
+keybind = shift+end=scroll_to_bottom
+
+# Copy/Paste
+keybind = super+c=copy_to_clipboard
+keybind = super+v=paste_from_clipboard
+
+# Search
+keybind = super+f=toggle_quick_terminal
 
