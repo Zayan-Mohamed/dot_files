@@ -1,6 +1,13 @@
 local utils = require("utils")
 
 ------------------------------------------------------------------------
+--                      Lua Rocks Configuration                       --
+------------------------------------------------------------------------
+-- Configure package path for luarocks (required for image.nvim magick rock)
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua"
+
+------------------------------------------------------------------------
 --                          custom variables                          --
 ------------------------------------------------------------------------
 vim.g.is_win = (utils.has("win32") or utils.has("win64")) and true or false
@@ -57,6 +64,9 @@ vim.g.did_install_default_menus = 1 -- do not load menu
 
 -- Custom mapping <leader> (see `:h mapleader` for more info)
 vim.g.mapleader = ","
+
+-- Custom mapping <localleader> for buffer-local mappings (notebooks, etc.)
+vim.g.maplocalleader = "\\"
 
 -- Enable highlighting for lua HERE doc inside vim script
 vim.g.vimsyn_embed = "l"
