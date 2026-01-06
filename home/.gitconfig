@@ -56,3 +56,5 @@
 	key = Signed-off-by
 	ifexists = add
 	where = end
+[url "git@github.com:"]
+	insteadOf = https://github.com/

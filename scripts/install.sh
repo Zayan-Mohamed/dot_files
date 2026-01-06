@@ -23,6 +23,13 @@ echo "[1/5] Linking ~/.config directories..."
 for d in "$DOT/config/"*; do
   [ -e "$d" ] || continue  # Skip if no files match
   name=$(basename "$d")
+  
+  # Skip documentation files
+  if [[ "$name" == *.md ]] || [[ "$name" == *.txt ]]; then
+    echo "    ⊘ Skipping documentation file: $name"
+    continue
+  fi
+  
   target="$HOME/.config/$name"
   mkdir -p "$(dirname "$target")"
   

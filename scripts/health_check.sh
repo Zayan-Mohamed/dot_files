@@ -27,12 +27,12 @@ print_ok() {
 
 print_warning() {
     echo -e "${YELLOW}⚠${NC} $1"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
 }
 
 print_error() {
     echo -e "${RED}✗${NC} $1"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
 }
 
 # Check if dot_files directory exists
@@ -55,6 +55,12 @@ echo ""
 echo -e "${BLUE}[2/6] Checking ~/.config symlinks...${NC}"
 for d in "$DOT/config/"*; do
     name=$(basename "$d")
+    
+    # Skip documentation files
+    if [[ "$name" == *.md ]] || [[ "$name" == *.txt ]]; then
+        continue
+    fi
+    
     target="$HOME/.config/$name"
     
     if [ -L "$target" ]; then
@@ -73,7 +79,7 @@ echo ""
 
 # Check home dotfiles
 echo -e "${BLUE}[3/6] Checking ~/ dotfile symlinks...${NC}"
-# Use find to avoid glob expansion issues
+# Use find to get both files and directories, avoiding glob expansion issues
 while IFS= read -r -d '' f; do
     name=$(basename "$f")
     target="$HOME/$name"
@@ -89,7 +95,7 @@ while IFS= read -r -d '' f; do
     else
         print_warning "$name: not linked"
     fi
-done < <(find "$DOT/home" -maxdepth 1 -type f -print0)
+done < <(find "$DOT/home" -maxdepth 1 \( -type f -o -type d \) -name '.*' -print0)
 echo ""
 
 # Check aliases file
@@ -114,7 +120,8 @@ essential_tools=(
 )
 
 for tool in "${essential_tools[@]}"; do
-    IFS=: read -r cmd desc <<< "$tool"
+    cmd="${tool%%:*}"
+    desc="${tool#*:}"
     if command -v "$cmd" >/dev/null 2>&1; then
         version=$(eval "$cmd --version 2>&1 | head -1" || echo "unknown")
         print_ok "$desc installed: $version"
@@ -136,7 +143,8 @@ recommended_tools=(
 )
 
 for tool in "${recommended_tools[@]}"; do
-    IFS=: read -r cmd desc <<< "$tool"
+    cmd="${tool%%:*}"
+    desc="${tool#*:}"
     if command -v "$cmd" >/dev/null 2>&1; then
         print_ok "$desc installed"
     else

@@ -1,15 +1,37 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# ============================================================================
+# PROMPT THEME SELECTOR (Starship / Powerlevel10k)
+# ============================================================================
+# Toggle between themes using: toggle
+# Check current theme: check-prompt
+# Set specific theme: toggle starship OR toggle p10k
+
+PROMPT_STATE_FILE="$HOME/.config/prompt_theme"
+
+# Initialize state file if it doesn't exist (default to p10k)
+if [[ ! -f "$PROMPT_STATE_FILE" ]]; then
+    mkdir -p "$HOME/.config"
+    echo "p10k" > "$PROMPT_STATE_FILE"
+fi
+
+CURRENT_PROMPT=$(cat "$PROMPT_STATE_FILE" 2>/dev/null || echo "p10k")
+
+# ============================================================================
+# POWERLEVEL10K CONFIGURATION (Only loaded if p10k is active)
+# ============================================================================
+if [[ "$CURRENT_PROMPT" == "p10k" ]]; then
+    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+    # Initialization code that may require console input (password prompts, [y/n]
+    # confirmations, etc.) must go above this block; everything else may go below.
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+      source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+
+    # Enable P10k instant prompt
+    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
-# Enable P10k instant prompt
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -18,7 +40,13 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set theme based on current selection
+if [[ "$CURRENT_PROMPT" == "starship" ]]; then
+    ZSH_THEME=""  # Disable Oh-My-Zsh theme when using Starship
+else
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -208,3 +236,27 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export PATH=$PATH:/usr/local/go/bin
 
 export PATH="$HOME/go/bin:$PATH"
+
+# ============================================================================
+# STARSHIP PROMPT INITIALIZATION (Only loaded if starship is active)
+# ============================================================================
+if [[ "$CURRENT_PROMPT" == "starship" ]]; then
+    export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+    if command -v starship &> /dev/null; then
+        eval "$(starship init zsh)"
+    else
+        echo "⚠️  Starship is not installed. Install it with:"
+        echo "    curl -sS https://starship.rs/install.sh | sh"
+        echo "    OR: brew install starship"
+    fi
+fi
+
+# ============================================================================
+# PROMPT SWITCHER FUNCTIONS
+# ============================================================================
+# Load prompt switcher functions
+if [[ -f "$HOME/dot_files/shell/prompt_switcher.sh" ]]; then
+    source "$HOME/dot_files/shell/prompt_switcher.sh"
+elif [[ -f "$HOME/.dotfiles/shell/prompt_switcher.sh" ]]; then
+    source "$HOME/.dotfiles/shell/prompt_switcher.sh"
+fi

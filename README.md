@@ -5,11 +5,10 @@
 ![Editor](https://img.shields.io/badge/editor-neovim-57A143)
 ![License](https://img.shields.io/badge/license-MIT-black)
 
-
 A fully reproducible Linux development environment built around symlinks.
 
 This repository manages everything in `~/.config` and essential dotfiles in `~`, all tracked in one place and safely symlinked back to the system.  
-The goal is simple: clone the repo, run one script, and get *your exact setup* every time.
+The goal is simple: clone the repo, run one script, and get _your exact setup_ every time.
 
 No manual copying. No drift. No mystery state.
 
@@ -24,6 +23,49 @@ No manual copying. No drift. No mystery state.
 - A heavily tuned Neovim setup with documentation
 - A Zsh environment that feels fast, safe, and modern
 
+## ⭐ Recent Enhancements
+
+### 🚀 Starship Prompt Integration
+
+This dotfiles setup now includes **[Starship](https://starship.rs/)**, a blazing-fast, cross-shell prompt written in Rust! It works alongside Powerlevel10k, giving you the flexibility to switch between themes instantly.
+
+**Why Starship?**
+
+- ⚡ **Blazing Fast** - Written in Rust for maximum performance
+- 🎨 **Beautiful** - Rich colors, icons, and 40+ language/tool detections
+- 🔧 **Customizable** - Simple TOML configuration
+- 🔀 **Cross-Shell** - Works with Zsh, Bash, Fish, PowerShell, and more
+- 📦 **Comprehensive** - Auto-detects Git, Docker, Cloud providers, and more
+
+### 🔄 Switching Between Prompts
+
+Built-in toggle mechanism makes switching effortless:
+
+| Command           | Description                               |
+| ----------------- | ----------------------------------------- |
+| `toggle`          | Toggle between Starship and Powerlevel10k |
+| `toggle starship` | Switch to Starship                        |
+| `toggle p10k`     | Switch to Powerlevel10k                   |
+| `check-prompt`    | Check which prompt is currently active    |
+
+**Quick Start:**
+
+```bash
+# Install Starship
+curl -sS https://starship.rs/install.sh | sh
+
+# Switch to Starship
+toggle starship
+exec zsh
+
+# Switch back to Powerlevel10k anytime
+toggle p10k
+exec zsh
+```
+
+> 📘 **Full Guide**: See [STARSHIP_GUIDE.md](/config/STARSHIP_GUIDE.md) for installation, configuration, and customization details
+
+---
 
 ## Structure
 
@@ -36,6 +78,8 @@ dot_files/
 │   ├── wezterm/
 │   ├── ghostty/
 │   ├── nvim/
+│   ├── starship.toml           # Starship prompt configuration
+├───├── STARSHIP_GUIDE.md       # Starship configuration and usage guide
 │   └── ...                     # other app configs
 │
 ├── home/                       # dotfiles in ~ (not ~/.config)
@@ -55,7 +99,8 @@ dot_files/
 │   └── fix_nested.sh           # flattens accidental nested directories
 │
 ├── shell/                      # shell configuration
-│   └── linux_aliases.sh        # custom aliases (linked to ~/.aliases)
+│   ├── linux_aliases.sh        # custom aliases (linked to ~/.aliases)
+│   └── prompt_switcher.sh      # Starship/P10k toggle functions
 │
 ├── QUICKSTART.md               # 5-minute setup guide
 ├── DEPENDENCIES.md             # required and optional dependencies
@@ -142,7 +187,10 @@ source ~/.zshrc              # Reload shell configuration
 
 - **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
 - **[DEPENDENCIES.md](./DEPENDENCIES.md)** - All required and optional dependencies
-- **[KEYBINDINGS](./NVIM_KEYBINDINGS.md)** - Reference for all keybindings in your Neovim configuration
+- **[NVIM_KEYBINDINGS.md](./NVIM_KEYBINDINGS.md)** - Complete keybindings reference for Neovim
+- **[STARSHIP_GUIDE.md](./config/STARSHIP_GUIDE.md)** - Starship installation, configuration, and customization guide
+
+> 💡 **Prompt Freedom**: Both Powerlevel10k and Starship are fully supported. Switch between them instantly with `toggle`!
 
 ### Neovim Study Guide
 
@@ -167,37 +215,6 @@ Perfect for both beginners learning Neovim and experienced users wanting to leve
 
 ---
 
-## ✨ What's New (Recent Enhancements)
-
-### Scripts
-
-- ✅ **health_check.sh** - Verify all symlinks and dependencies
-- ✅ **check_tools.sh** - Check for modern CLI tools with installation instructions
-- ✅ Fixed bug in `update.sh` that was copying scripts to themselves
-
-### Configuration
-
-- ✅ **Global .gitignore** - Comprehensive gitignore for all projects
-- ✅ **Enhanced Git aliases** - Better git log, undo, cleanup, and more
-- ✅ **Modern CLI tool aliases** - Conditional aliases for bat, fd, rg, dust, etc.
-- ✅ **Safety aliases** - Interactive cp, mv, ln to prevent accidents
-- ✅ **Improved history** - Shared history across sessions, better deduplication
-- ✅ **Development shortcuts** - Quick navigation, editing, and workflow aliases
-
-### Documentation
-
-- ✅ **QUICKSTART.md** - Fast onboarding for new users
-- ✅ **DEPENDENCIES.md** - Complete dependency documentation
-- ✅ **NVIM_STUDY_GUIDE.md** - Comprehensive Neovim learning guide
-- ✅ **ENHANCEMENT_PLAN.md** - Future improvements roadmap
-
-### Structure
-
-- ✅ Moved shell configs (.zshrc, .bashrc, .gitconfig) to proper `home/` location
-- ✅ Better organization and consistency
-
----
-
 ## 🎯 Features
 
 ### Terminals
@@ -208,11 +225,14 @@ Perfect for both beginners learning Neovim and experienced users wanting to leve
 
 ### Shell (Zsh)
 
-- **Powerlevel10k** theme with beautiful prompts
+- **Dual Prompt Themes** - Seamlessly switch between:
+  - **Starship** - Rust-powered, 40+ language/tool detection, blazing fast
+  - **Powerlevel10k** - Feature-rich Zsh theme with instant prompt
 - **Syntax highlighting** as you type
 - **Autosuggestions** from command history
 - **Smart history** shared across all sessions
 - **Modern aliases** for common tasks
+- **One-command switching** - Toggle prompts without conflicts
 
 ### Editor (Neovim)
 
