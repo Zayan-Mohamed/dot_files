@@ -41,7 +41,7 @@
 [user]
 	name = Zayan-Mohamed
 	email = itsm.zayan@gmail.com
-	signingkey = 83ABEAB456DD3780
+	signingkey = CFA46981D5B369A0
 [commit]
 	gpgsign = true
 [gpg]
@@ -58,3 +58,5 @@
 	where = end
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[tag]
+	gpgsign = true
