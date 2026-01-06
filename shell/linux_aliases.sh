@@ -1,3 +1,5 @@
+[[ -o interactive ]] || return
+
 # Directory Listing (modern eza)
 alias ll="eza -la --icons --group-directories-first"
 alias la="eza -a --icons --group-directories-first"
@@ -129,8 +131,8 @@ if command -v bat >/dev/null 2>&1; then
 fi
 
 # Better find (fd)
-if command -v fd >/dev/null 2>&1; then
-  alias find="fd"
+if command -v fdfind >/dev/null 2>&1; then
+  alias find="fdfind"
 fi
 
 # Better grep (ripgrep)

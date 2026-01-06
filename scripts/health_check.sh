@@ -135,8 +135,8 @@ echo ""
 echo -e "${BLUE}[6/6] Checking recommended tools...${NC}"
 recommended_tools=(
     "eza:Modern ls replacement"
-    "bat:Better cat with syntax highlighting"
-    "fd:Better find"
+    "bat|batcat:Better cat with syntax highlighting"
+    "fd|fdfind:Better find"
     "rg:Ripgrep (better grep)"
     "fzf:Fuzzy finder"
     "htop:System monitor"
@@ -145,10 +145,28 @@ recommended_tools=(
 for tool in "${recommended_tools[@]}"; do
     cmd="${tool%%:*}"
     desc="${tool#*:}"
-    if command -v "$cmd" >/dev/null 2>&1; then
-        print_ok "$desc installed"
+    
+    # Check if cmd contains alternatives (e.g., "bat|batcat")
+    if [[ "$cmd" == *"|"* ]]; then
+        IFS='|' read -ra alternatives <<< "$cmd"
+        found=false
+        for alt in "${alternatives[@]}"; do
+            if command -v "$alt" >/dev/null 2>&1; then
+                found=true
+                break
+            fi
+        done
+        if $found; then
+            print_ok "$desc installed"
+        else
+            print_warning "$desc not installed (optional)"
+        fi
     else
-        print_warning "$desc not installed (optional)"
+        if command -v "$cmd" >/dev/null 2>&1; then
+            print_ok "$desc installed"
+        else
+            print_warning "$desc not installed (optional)"
+        fi
     fi
 done
 echo ""
