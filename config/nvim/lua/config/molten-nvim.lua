@@ -185,8 +185,12 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.ipynb" },
   callback = function()
-    if require("molten.status").initialized() == "Molten" then
-      vim.cmd("MoltenExportOutput!")
+    local ok, molten_status = pcall(require, "molten.status")
+    if ok then
+      local init_ok, status = pcall(molten_status.initialized)
+      if init_ok and status == "Molten" then
+        vim.cmd("MoltenExportOutput!")
+      end
     end
   end,
 })
@@ -198,7 +202,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     if string.match(e.file, ".otter.") then
       return
     end
-    if require("molten.status").initialized() == "Molten" then
+    local ok, molten_status = pcall(require, "molten.status")
+    local is_initialized = false
+    if ok then
+      local init_ok, status = pcall(molten_status.initialized)
+      is_initialized = init_ok and status == "Molten"
+    end
+    if is_initialized then
       vim.fn.MoltenUpdateOption("virt_lines_off_by_1", false)
       vim.fn.MoltenUpdateOption("virt_text_output", false)
     else
@@ -215,7 +225,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     if string.match(e.file, ".otter.") then
       return
     end
-    if require("molten.status").initialized() == "Molten" then
+    local ok, molten_status = pcall(require, "molten.status")
+    local is_initialized = false
+    if ok then
+      local init_ok, status = pcall(molten_status.initialized)
+      is_initialized = init_ok and status == "Molten"
+    end
+    if is_initialized then
       vim.fn.MoltenUpdateOption("virt_lines_off_by_1", true)
       vim.fn.MoltenUpdateOption("virt_text_output", true)
     else
