@@ -260,3 +260,10 @@ if [[ -f "$HOME/dot_files/shell/prompt_switcher.sh" ]]; then
 elif [[ -f "$HOME/.dotfiles/shell/prompt_switcher.sh" ]]; then
     source "$HOME/.dotfiles/shell/prompt_switcher.sh"
 fi
+
+#ensure your shell knows which terminal is active for the password prompt
+export GPG_TTY=$(tty)
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

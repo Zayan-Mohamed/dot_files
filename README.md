@@ -222,6 +222,7 @@ Perfect for both beginners learning Neovim and experienced users wanting to leve
 - **Alacritty** - GPU-accelerated, highly configurable
 - **Kitty** - Advanced features with ligatures
 - **Ghostty** - Modern, native terminal
+- **WezTerm** - GPU-accelerated with Lua scripting, pane/tab management, and modern keybindings
 
 ### Shell (Zsh)
 
