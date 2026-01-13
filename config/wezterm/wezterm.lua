@@ -12,12 +12,12 @@ config.cursor_blink_ease_out = "Constant"
 config.font = wezterm.font( "Jetbrains Mono", { weight = "Regular" })
 config.font_size = 12
 config.use_dead_keys = false
-config.line_height = 1.2
+config.line_height = 1.5
 config.window_padding = {
-        left = 0,
-        right = 0,
-        top = 0,
-        bottom = 0,
+        left = 14,
+        right = 14,
+        top = 14,
+        bottom = 14,
 }
 
 config.window_frame = {
