@@ -267,3 +267,6 @@ export GPG_TTY=$(tty)
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+# opencode
+export PATH=$HOME/.opencode/bin:$PATH
