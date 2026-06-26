@@ -36,6 +36,19 @@
 	# Show aliases
 	aliases = config --get-regexp alias
 
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true        # n/N to move between diff sections
+	line-numbers = true
+	side-by-side = false
+	hyperlinks = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	colorMoved = default
 [pull]
 	rebase = true
 [user]
@@ -59,4 +72,8 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [tag]
-	gpgsign = true
+  gpgsign = true
+
+# Automatically use work settings when inside the ~/work/ directory
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig-work

@@ -12,3 +12,5 @@ __pycache__/
 secrets.yml
 backups/
 config/oh-my-zsh/custom/plugins/*
+*.bak
+*conf.bak

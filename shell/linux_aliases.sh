@@ -8,9 +8,7 @@ alias lt="eza -l --sort=modified --icons --group-directories-first"
 alias ltr="eza -l --sort=modified --reverse --icons --group-directories-first"
 alias lsd="eza -D --icons --group-directories-first"
 
-# Modern CLI Tools
-alias cat="batcat"
-alias bat="batcat"
+# Modern CLI Tools (real bat/fd via Homebrew; see conditional overrides below)
 
 # General Navigation
 alias ..="cd .."
@@ -130,9 +128,33 @@ if command -v bat >/dev/null 2>&1; then
   alias catt="bat"  # Full bat with line numbers
 fi
 
-# Better find (fd)
-if command -v fdfind >/dev/null 2>&1; then
+# Better find (fd via brew, or fdfind via apt)
+if command -v fd >/dev/null 2>&1; then
+  alias find="fd"
+elif command -v fdfind >/dev/null 2>&1; then
   alias find="fdfind"
+  alias fd="fdfind"
+fi
+
+# Better sed (sd) — only alias the helper, not `sed` itself (syntax differs)
+if command -v sd >/dev/null 2>&1; then
+  alias subst="sd"   # subst 'find' 'replace' file
+fi
+
+# Container TUI / GitHub dashboard / file manager
+command -v lazydocker >/dev/null 2>&1 && alias lzd="lazydocker"
+command -v gh >/dev/null 2>&1 && alias ghd="gh dash"
+
+# yazi: 'y' opens the file manager and cd's to wherever you quit
+if command -v yazi >/dev/null 2>&1; then
+  y() {
+    local tmp="$(mktemp -t yazi-cwd.XXXXXX)" cwd
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+      builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+  }
 fi
 
 # Better grep (ripgrep)

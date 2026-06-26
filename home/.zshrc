@@ -36,6 +36,9 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Skip global compinit, we'll do it once at the end
+skip_global_compinit=1
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -54,75 +57,27 @@ fi
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+# Speed up repo status in large repos (skip untracked-file scan)
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# You can also set it to another string to have that shown instead of the default red dots.
-# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
-# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-
+# Plugins — keep this list short; each one adds startup cost.
 plugins=(
 git
-node
-npm
-docker
 zsh-autosuggestions
 z
 zsh-syntax-highlighting
-zsh-history-substring-search
 colored-man-pages
 sudo
-zsh-autopair
-web-search
 )
+
+# Limit syntax highlighting to the fast highlighters (must be set BEFORE the
+# plugin loads via oh-my-zsh.sh, otherwise it has no effect). Fewer highlighters
+# = less work per keystroke on long command lines.
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# Tune autosuggestions for speed: cap the buffer it tries to suggest on and use
+# async fetching so it never blocks typing.
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 source $ZSH/oh-my-zsh.sh
 
@@ -130,21 +85,6 @@ source $ZSH/oh-my-zsh.sh
 [ -f ~/.aliases ] && source ~/.aliases
 
 # User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by Oh My Zsh libs,
 # plugins, and themes. Aliases can be placed here, though Oh My Zsh
@@ -157,63 +97,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#source ~/.local/share/omakub/defaults/bash/rc
 
-# Android SDK
-export ANDROID_SDK_ROOT="$HOME/Android/Sdk"
-export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-# Editor
-export EDITOR="nvim"
-export SUDO_EDITOR="$EDITOR"
-
-#Node.js 
-export PATH=/opt/nodejs/bin:$PATH
-export PATH="$HOME/development/flutter/bin:$PATH"
-
-#CURSOR
-export PATH="/usr/local/bin:$PATH"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Configure autosuggestions appearance
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/zayan/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/zayan/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/zayan/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/zayan/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-#lua-language-server
-export PATH="$HOME/lua-language-server/bin:$PATH"
-
-# Added by CodeRabbit CLI installer
-export PATH="/home/zayan/.local/bin:$PATH"
-
-#Added cargo-binstall PATH
-export PATH="$HOME/.cargo/bin:$PATH"
-
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Enable command completion
-autoload -Uz compinit && compinit
-
-# Enable fzf key bindings for Zsh if installed
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Better history behavior
 HISTSIZE=50000
@@ -231,11 +117,42 @@ setopt auto_cd
 setopt auto_pushd
 setopt pushd_ignore_dups
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Kiro terminal integration
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-export PATH=$PATH:/usr/local/go/bin
+# Enable command completion with caching (only do the slow security check once
+# per day; otherwise load the cached dump with -C). $ZDOTDIR was unset before, so
+# the old glob looked at /.zcompdump and never matched -> full compinit every time.
+autoload -Uz compinit
+_zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -n ${_zcompdump}(#qN.mh+24) ]]; then
+  compinit -d "$_zcompdump"
+else
+  compinit -C -d "$_zcompdump"
+fi
+# Compile the dump to bytecode in the background for a faster next startup
+if [[ -s "$_zcompdump" && (! -s "${_zcompdump}.zwc" || "$_zcompdump" -nt "${_zcompdump}.zwc") ]]; then
+  zcompile "$_zcompdump" &!
+fi
+unset _zcompdump
 
-export PATH="$HOME/go/bin:$PATH"
+# Lazy load fzf - defer loading until first use
+if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi
+
+# Homebrew env set statically instead of `eval "$(brew shellenv)"`, which forks a
+# ruby/bash subprocess on every shell start (~50-100ms). PATH is already set in
+# .zshenv; here we just export the prefixes brew tools expect.
+if [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+    export HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar"
+    export HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew"
+    export HOMEBREW_NO_AUTO_UPDATE=1
+    export HOMEBREW_NO_ENV_HINTS=1
+    [[ ":$MANPATH:" != *":/home/linuxbrew/.linuxbrew/share/man:"* ]] && export MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH:+:$MANPATH}"
+    [[ ":$INFOPATH:" != *":/home/linuxbrew/.linuxbrew/share/info:"* ]] && export INFOPATH="/home/linuxbrew/.linuxbrew/share/info${INFOPATH:+:$INFOPATH}"
+fi
 
 # ============================================================================
 # STARSHIP PROMPT INITIALIZATION (Only loaded if starship is active)
@@ -245,7 +162,7 @@ if [[ "$CURRENT_PROMPT" == "starship" ]]; then
     if command -v starship &> /dev/null; then
         eval "$(starship init zsh)"
     else
-        echo "⚠️  Starship is not installed. Install it with:"
+        echo "Starship is not installed. Install it with:"
         echo "    curl -sS https://starship.rs/install.sh | sh"
         echo "    OR: brew install starship"
     fi
@@ -261,12 +178,32 @@ elif [[ -f "$HOME/.dotfiles/shell/prompt_switcher.sh" ]]; then
     source "$HOME/.dotfiles/shell/prompt_switcher.sh"
 fi
 
-#ensure your shell knows which terminal is active for the password prompt
-export GPG_TTY=$(tty)
+# GPG_TTY is exported once in .zshenv (avoids a second $(tty) subprocess here)
 
-. "$HOME/.atuin/bin/env"
+# Defer atuin initialization for faster startup
+if [[ -f "$HOME/.atuin/bin/env" ]]; then
+    . "$HOME/.atuin/bin/env"
+    eval "$(atuin init zsh --disable-up-arrow)"
+fi
 
-eval "$(atuin init zsh)"
+# opencode PATH is already set in .zshenv (typeset -U keeps it unique)
 
-# opencode
-export PATH=$HOME/.opencode/bin:$PATH
+# navi: interactive cheatsheet widget bound to Ctrl-G
+if command -v navi >/dev/null 2>&1; then
+    eval "$(navi widget zsh)"
+fi
+
+# bat as the colorizing pager for man pages
+if command -v bat >/dev/null 2>&1; then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+    export MANROFFOPT="-c"
+fi
+
+# fzf: use fd for file/dir search (faster, respects .gitignore) + bat previews
+if command -v fd >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+fi
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview-window=right:60%"
+command -v bat >/dev/null 2>&1 && export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:300 {}'"
